@@ -9,7 +9,7 @@ const Invoice = () => {
 
   const date = new Date().toLocaleDateString();
   const location = useLocation();
-  const { customerName, products = [] } = location.state || { products: [] };
+  const { customerName, trn, products = [] } = location.state || { products: [] };
 
   // Function to calculate total price for each product
   const calculateTotal = (price, quantity) => Number(price) * Number(quantity);
@@ -40,9 +40,9 @@ const Invoice = () => {
       {/* Customer & Invoice Details */}
       <div className="mt-4 grid grid-cols-2 text-sm">
         <div>
-          <p><strong>Customer:</strong> {customerName}</p>
-          <p>FRUITS & VEGETABLE MARKET DUBAI</p>
-          <p><strong>TRN:</strong> 100453349100003</p>
+          <p><strong>Customer:</strong> {customerName} </p>
+          
+          <p><strong>TRN:</strong> {trn}</p>
         </div>
         <div className="text-right">
           <p><strong>Invoice #:</strong> MSVF/0101/2025</p>

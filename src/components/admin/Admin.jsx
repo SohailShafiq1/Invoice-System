@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
@@ -7,7 +7,7 @@ const Admin = () => {
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
-
+  const [trn, setTrn] = useState("")
   const navigate = useNavigate();
 
   // Function to add a product to the list
@@ -29,7 +29,7 @@ const Admin = () => {
   // Function to navigate to invoice with all added products
   const handleInvoice = () => {
     if (customerName && products.length > 0) {
-      navigate("/invoice", { state: { customerName, products } });
+      navigate("/invoice", { state: { customerName,trn , products } });
     } else {
       alert("Please enter customer details and add at least one product.");
     }
@@ -74,6 +74,15 @@ const Admin = () => {
           placeholder="Enter quantity"
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
+          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        <h1 className="text-xl font-semibold mt-4 mb-2">TRN:</h1>
+        <input
+          type="number"
+          placeholder="Enter TRN "
+          value={trn}
+          onChange={(e) => setTrn(e.target.value)}
           className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
