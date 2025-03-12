@@ -7,7 +7,8 @@ const Admin = () => {
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [trn, setTrn] = useState("")
+  const [trn, setTrn] = useState("");
+  const [date, setDate] = useState("");
   const navigate = useNavigate();
 
   // Function to add a product to the list
@@ -22,14 +23,15 @@ const Admin = () => {
 
   // Function to remove a product by index
   const removeProduct = (indexToRemove) => {
-    const updatedProducts = products.filter((_, index) => index !== indexToRemove);
+    const updatedProducts = products.filter(
+      (_, index) => index !== indexToRemove);
     setProducts(updatedProducts);
   };
 
   // Function to navigate to invoice with all added products
   const handleInvoice = () => {
     if (customerName && products.length > 0) {
-      navigate("/invoice", { state: { customerName,trn , products } });
+      navigate("/invoice", { state: { customerName,date, trn, products } });
     } else {
       alert("Please enter customer details and add at least one product.");
     }
@@ -37,7 +39,7 @@ const Admin = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-       <h1 className="text-xl font-bold text-center mb-5">
+      <h1 className="text-xl font-bold text-center mb-5">
         MUHAMMAD SIDDIQUE VEGETABLES & FRUIT TRADING LLC
       </h1>
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
@@ -85,7 +87,14 @@ const Admin = () => {
           onChange={(e) => setTrn(e.target.value)}
           className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-
+<h1 className="text-xl font-semibold mt-4 mb-2">Date:</h1>
+        <input
+          type="date"
+          placeholder="Enter Date "
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
         <button
           onClick={addProduct}
           className="mt-4 w-full bg-green-500 text-white font-semibold py-2 rounded-md hover:bg-green-600 transition-all"
@@ -120,8 +129,12 @@ const Admin = () => {
                 <tr key={index}>
                   <td className="border px-2 py-1 text-center">{index + 1}</td>
                   <td className="border px-2 py-1">{product.productName}</td>
-                  <td className="border px-2 py-1 text-center">{product.price}</td>
-                  <td className="border px-2 py-1 text-center">{product.quantity}</td>
+                  <td className="border px-2 py-1 text-center">
+                    {product.price}
+                  </td>
+                  <td className="border px-2 py-1 text-center">
+                    {product.quantity}
+                  </td>
                   <td className="border px-2 py-1 text-center">
                     <button
                       onClick={() => removeProduct(index)}

@@ -1,15 +1,17 @@
-import React from "react";
+import React, { use, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { toWords } from "number-to-words";
 
 const Invoice = () => {
   const handlePrint = () => {
+    
     window.print();
+    
   };
 
-  const date = new Date().toLocaleDateString();
+
   const location = useLocation();
-  const { customerName, trn, products = [] } = location.state || { products: [] };
+  const { customerName,date, trn, products = [] } = location.state || { products: [] };
 
   // Function to calculate total price for each product
   const calculateTotal = (price, quantity) => Number(price) * Number(quantity);
@@ -26,7 +28,7 @@ const Invoice = () => {
   const grandTotalInWords = toWords(finalAmount).toUpperCase() + " ONLY";
 
   return (
-    <div className="max-w-5xl mx-auto p-6 border rounded-lg shadow-lg bg-white">
+    <div className="max-w-5xl mx-auto p-6 ">
       {/* Header Section */}
       <h1 className="text-xl font-bold text-center">
         MUHAMMAD SIDDIQUE VEGETABLES & FRUIT TRADING LLC
@@ -54,7 +56,7 @@ const Invoice = () => {
       <div className="overflow-x-auto">
         <table className="w-full mt-4 border-collapse border text-sm min-w-[600px]">
           <thead>
-            <tr className="bg-green-500 text-white">
+            <tr className="">
               <th className="border px-2 py-1">SR NO</th>
               <th className="border px-2 py-1">DESCRIPTION</th>
               <th className="border px-2 py-1">QTY</th>
@@ -114,7 +116,8 @@ const Invoice = () => {
         </NavLink>
         <button 
           onClick={handlePrint} 
-          className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition">
+            
+          className="bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition " >
           Print
         </button>
       </div>
