@@ -5,11 +5,14 @@ import { toWords } from "number-to-words";
 const Invoice = () => {
   const [isprinted, setIsPrinted] = useState(false);
   const handlePrint = () => {
+    const originalTitle = document.title;
+    document.title = "Recipt";
     setIsPrinted(true);
     setTimeout(() => {
       window.print();
     }, 50);
     setTimeout(() => {
+      document.title = originalTitle;
       setIsPrinted(false);
     }, 2000);
   };
